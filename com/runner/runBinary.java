@@ -1,6 +1,5 @@
 package com.runner;
 
-import java.util.Scanner;
 
 import com.logic.menuBinaryToChar;
 import com.logic.menuCharToBinary;
@@ -16,8 +15,10 @@ public class runBinary {
 			try {
 				choice = menu.printMenuAndChoice();
 				if (choice == 1) {
+					@SuppressWarnings("unused")
 					menuCharToBinary ctb = new menuCharToBinary();
 				} else if (choice == 2) {
+					@SuppressWarnings("unused")
 					menuBinaryToChar btc = new menuBinaryToChar();
 				}else if (choice == 3 ){
 					menu.printErrorMenu("Stopped");

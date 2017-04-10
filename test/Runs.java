@@ -1,12 +1,12 @@
 package test;
 
+import com.logic.menuCharToBinary;
+import com.utilities.Utilities;
+
 public class Runs {
 
 	public static void main(String[] args) {
-		String setPin = "00111";
-		int numberCheck = new BinaryToNumber(setPin).getNumber();
-		System.out.println(numberCheck);
-
+		menuCharToBinary mctb = new menuCharToBinary();
 	}
 
 }

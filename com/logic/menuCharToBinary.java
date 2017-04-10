@@ -4,23 +4,51 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
 
+import com.utilities.Utilities;
+
 public class menuCharToBinary {
 	Scanner scan = new Scanner(System.in);
 	private String word;
-	List<String> binaryVec = new Vector<>();
 	List<List<String>> listWords = new Vector<>();
+	List<Integer[]> indexContainer = new Vector<>();
+	boolean needsRandom = false;
 
 	public menuCharToBinary() {
-		System.out.println("\t\tText to Binary");
+		System.out.print("Random ? (y to access) : ");
+		String isRandomString = scan.nextLine();
+		
+		needsRandom = isRandomString.equalsIgnoreCase("y");
+		if(needsRandom){
+			System.out.println("\n\t\tText to Binary (random)");
+		}else{
+			System.out.println("\n\t\tText to Binary");
+		}
 		System.out.print("input : ");
 		word = scan.nextLine();
+
+		if (needsRandom) {
+			random(word);
+		}
 		getBinary();
 		printBinary();
+
+	}
+
+	public void random(String word) {
+		String[] words = word.split(" ");
+		String[] newWords = new String[words.length];
+		this.word = "";
+		for (int i = 0; i < words.length; i++) {
+			Integer[] randomIndex = Utilities.randomArraysIndex(words[i]);
+			newWords[i] = Utilities.getStringFromArrayIndex(words[i], randomIndex);
+			this.word += newWords[i]+" ";
+			indexContainer.add(randomIndex);
+		}
 	}
 
 	public void getBinary() {
 		String[] words = word.split(" ");
-		
+		System.out.println("-- words --");
 		for (String wordSplitted : words) {
 			System.out.println(wordSplitted);
 			List<String> sentence = new Vector<>();
@@ -31,23 +59,53 @@ public class menuCharToBinary {
 			}
 			listWords.add(sentence);
 		}
-		
 	}
 
 	public void printBinary() {
-		System.out.println("=========== Result ===========");
-		for (List<String> binaryVecs : listWords) {
-			for (int i = 0; i < binaryVecs.size(); i++) {
-				if (i == 0) {
-					System.out.print(binaryVecs.get(i));
-				} else {
-					System.out.print("." + binaryVecs.get(i));
+		if (needsRandom) {
+			String result = "";
+			String indexResult = "";
+			System.out.println("=========== Result ===========");
+
+			// word
+			for (int i = 0; i < listWords.size(); i++) {
+				List<String> binaryVecs = listWords.get(i);
+				Integer[] wordIndexContainer = indexContainer.get(i);
+				// char
+				for (int j = 0; j < binaryVecs.size(); j++) {
+					if (j == 0) {
+						result += binaryVecs.get(j);
+					} else {
+						result += "." + binaryVecs.get(j);
+					}
 				}
+				indexResult += Utilities.getValueFromArrayWithSherwyFormat(wordIndexContainer)+ " ";
+				result += " ";
 			}
-			System.out.print(" ");
+			System.out.println(indexResult + " - " + result);
+			System.out.println("==============================");
+			System.out.println();
+		}else{
+			String result = "";
+			System.out.println("=========== Result ===========");
+
+			// word
+			for (int i = 0; i < listWords.size(); i++) {
+				List<String> binaryVecs = listWords.get(i);
+				// char
+				for (int j = 0; j < binaryVecs.size(); j++) {
+					if (j == 0) {
+						result += binaryVecs.get(j);
+					} else {
+						result += "." + binaryVecs.get(j);
+					}
+				}
+				result += " ";
+			}
+			System.out.println("Result : " + result);
+			System.out.println("==============================");
+			System.out.println();
 		}
-		System.out.println("\n==============================");
-		System.out.println();
 	}
 
 }
