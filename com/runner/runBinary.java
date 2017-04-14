@@ -7,6 +7,7 @@ import com.menu.Menu;
 
 public class runBinary {
 
+	
 	public static void main(String[] args) {
 		Menu menu = new Menu();
 

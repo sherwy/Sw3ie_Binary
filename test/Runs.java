@@ -1,12 +1,12 @@
 package test;
 
-import com.logic.menuCharToBinary;
-import com.utilities.Utilities;
+import com.logic.menuBinaryToChar;
 
 public class Runs {
 
 	public static void main(String[] args) {
-		menuCharToBinary mctb = new menuCharToBinary();
+		menuBinaryToChar btc = new menuBinaryToChar();
+		btc.setIndexContainer("64973(12)85(10)2(11)1 64973(12)85(10)2(11)1");
 	}
 
 }

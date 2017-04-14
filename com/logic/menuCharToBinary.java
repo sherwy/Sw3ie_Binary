@@ -26,9 +26,9 @@ public class menuCharToBinary {
 		System.out.print("input : ");
 		word = scan.nextLine();
 
-		if (needsRandom) {
+		if (needsRandom)
 			random(word);
-		}
+		
 		getBinary();
 		printBinary();
 
@@ -40,12 +40,26 @@ public class menuCharToBinary {
 		this.word = "";
 		for (int i = 0; i < words.length; i++) {
 			Integer[] randomIndex = Utilities.randomArraysIndex(words[i]);
+			randomIndex = sortIntegerArray(randomIndex);
 			newWords[i] = Utilities.getStringFromArrayIndex(words[i], randomIndex);
 			this.word += newWords[i]+" ";
 			indexContainer.add(randomIndex);
 		}
 	}
-
+	
+	public Integer[] sortIntegerArray(Integer[] array){
+		Integer[] temp = new Integer[array.length];
+		for(int i=0 ; i<array.length ; i++){
+			for(int j=0 ; j<array.length ; j++){
+				if((array[j]-1) == i){
+					temp[i] = j+1;
+					break;
+				}
+			}
+		}
+		return temp;
+	}
+	
 	public void getBinary() {
 		String[] words = word.split(" ");
 		System.out.println("-- words --");

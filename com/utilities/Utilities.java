@@ -44,9 +44,15 @@ public class Utilities {
 	}
 	
 	public static String getStringFromArrayIndex(String word,Integer[] indexContainer){
+		System.out.println("word : "+word);
 		String newWord = "";
+		char[] listChar = new char[word.length()];
 		for(int i=0 ; i<word.length() ; i++){
-			newWord += word.charAt((indexContainer[i]-1));
+			int realIndex = indexContainer[i]-1;
+			listChar[realIndex] = word.charAt(i);
+		}
+		for(int i=0 ; i<listChar.length ; i++){
+			newWord += listChar[i];
 		}
 		return newWord;
 	}
@@ -54,7 +60,7 @@ public class Utilities {
 	public static String getValueFromArrayWithSherwyFormat(Integer[] array){
 		String result = "";
 		for(int number : array){
-			String numberString = number+"";
+			String numberString = (number)+"";
 			if(numberString.length() > 1){
 				result += "("+number+")";
 			}else{
